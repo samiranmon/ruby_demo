@@ -1,0 +1,15 @@
+
+<h1><%= @bool.title %></h1>
+
+<p>
+   <strong>Price: </strong> $<%= @bool.price %><br />
+   <strong>Subject :</strong> <%= @bool.subject.name %><br />
+   <strong>Created Date:</strong> <%= @bool.created_at %><br />
+</p>
+
+<p><%= @bool.description %></p>
+<p><%#= @name %></p>
+
+<hr />
+
+<%= link_to 'Back', {:action => 'list'} %>

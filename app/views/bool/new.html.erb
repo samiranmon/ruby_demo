@@ -1,0 +1,30 @@
+<h1>Add new bool</h1>
+
+<%= form_tag :action => 'create' do %>
+
+
+<% if @bool.errors.any? %>
+<h3>Errors</h3>
+  <% @bool.errors.full_messages.each do |message| %>
+    <%=message%>
+  <% end %>
+<% end %>
+
+<p><label for = "bool_title">Title</label>:
+<%= text_field 'bool', 'title' %>
+    
+</p>
+
+<p><label for = "bool_price">Price</label>:
+<%= text_field 'bool', 'price' %></p>
+
+<p><label for = "bool_subject_id">Subject</label>:
+<%= collection_select(:bool, :subject_id, @subjects, :id, :name, prompt: true) %></p>
+
+<p><label for = "bool_description">Description</label><br/>
+<%= text_area 'bool', 'description' %></p>
+
+<%= submit_tag "Create" %>
+
+<% end -%>
+<%= link_to 'Back', {:action => 'list'} %>

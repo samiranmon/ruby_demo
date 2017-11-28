@@ -11,8 +11,8 @@ class BoolController < ApplicationController
     
     array = [] << 1 << 2 << 3
     
-#    render :json => array.inspect
-#    return
+    #    render :json => array.inspect
+    #    return
     
     
     @bool = Bool.find(params[:id])
@@ -20,16 +20,16 @@ class BoolController < ApplicationController
     
     
     
-#    render :json => @bool.subject.name
-#    return
+    #    render :json => @bool.subject.name
+    #    return
   end
   
    
   def new
     @bool = Bool.new
     @subjects = Subject.all
-#    render :json => @subjects.inspect
-#    return
+    #    render :json => @subjects.inspect
+    #    return
     
     
   end
@@ -38,16 +38,18 @@ class BoolController < ApplicationController
     @bool = Bool.new(bool_params)
     
     
-#    if @bool.valid? 
-#      @bool.errors.messages => {:title=>["can't be blank"]}
-#    end
+    #    if @bool.valid? 
+    #      @bool.errors.messages => {:title=>["can't be blank"]}
+    #    end
     
-#     render :json => bool_params
-#    return
+    #     render :json => bool_params
+    #    return
 	
     if @bool.save
+      flash[:success] = "Record has been updated successfully"
       redirect_to :action => 'list'
     else
+      flash[:error] = "Please try again!"
       @subjects = Subject.all
       render :action => 'new'
     end
@@ -79,11 +81,11 @@ class BoolController < ApplicationController
    
   def delete
     Bool.find(params[:id]).destroy
-   redirect_to :action => 'list'
+    redirect_to :action => 'list'
   end
   
   def show_subjects
-   @subject = Subject.find(params[:id])
-end
+    @subject = Subject.find(params[:id])
+  end
 
 end

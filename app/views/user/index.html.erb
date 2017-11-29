@@ -1,0 +1,25 @@
+<h1>Add new User</h1>
+
+<%= form_tag :action => 'create' do %>
+
+
+
+
+<p><label for = "user_first_name">First Name</label>:
+<%= text_field 'user', 'first_name' %>
+    
+</p>
+
+<p><label for = "user_last_name">Price</label>:
+<%= text_field 'bool', 'price' %></p>
+
+<p><label for = "bool_subject_id">Subject</label>:
+<%= collection_select(:bool, :subject_id, @subjects, :id, :name, prompt: true) %></p>
+
+<p><label for = "bool_description">Description</label><br/>
+<%= text_area 'bool', 'description' %></p>
+
+<%= submit_tag "Create" %>
+
+<% end -%>
+<%#= link_to 'Back', {:action => 'list'} %>

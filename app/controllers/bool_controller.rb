@@ -1,6 +1,20 @@
 class BoolController < ApplicationController
   
+  #layout 'standard'
+  
   def list
+    if @current_user.nil?
+      @current_user = User.find_by(id: session[:user_id])
+    else
+      @current_user
+    end
+    
+#    render :json => @current_user
+#        return
+    
+    #User.find(session[:user_id])
+    #User.find_by(id: session[:user_id])
+    
     @bools = Bool.all
   end
    
@@ -35,8 +49,13 @@ class BoolController < ApplicationController
   end
    
   def create
-    @bool = Bool.new(bool_params)
     
+    if request.post?
+      @bool = Bool.new(bool_params)
+    else 
+      @bool = Bool.new
+      @subjects = Subject.all
+    end
     
     #    if @bool.valid? 
     #      @bool.errors.messages => {:title=>["can't be blank"]}
@@ -49,10 +68,12 @@ class BoolController < ApplicationController
       flash[:success] = "Record has been updated successfully"
       redirect_to :action => 'list'
     else
-      flash[:error] = "Please try again!"
+      #flash[:error] = "Please try again!"
+      flash[:error] = @bool.errors.messages
       @subjects = Subject.all
       render :action => 'new'
     end
+    
   end
   
   def bool_params
